@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/jairmaiag/octopus/issues"
   },
-  "homepage": "https://github.com/jairmaiag/octopus#readme"
+  "homepage": "https://github.com/jairmaiag/octopus#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
