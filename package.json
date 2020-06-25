@@ -1,0 +1,24 @@
+{
+  "name": "octopus",
+  "version": "1.0.0",
+  "description": "Programa para integração de outros sistemas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jairmaiag/octopus.git"
+  },
+  "keywords": [
+    "Integração",
+    "mercado",
+    "livre"
+  ],
+  "author": "Jair Diniz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jairmaiag/octopus/issues"
+  },
+  "homepage": "https://github.com/jairmaiag/octopus#readme"
+}
