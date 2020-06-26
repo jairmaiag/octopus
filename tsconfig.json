@@ -11,7 +11,7 @@
     /* A configuração abaixo serve para fazer os import como abaixo
        import { User } from '@models/User';
     */
-    //"baseUrl": ".",
+    "baseUrl": ".",
     //"paths":{
     //  "@controllers/*":["./src/controllers/*"],
     //  "@models":["./src/models"],
