@@ -8,6 +8,16 @@
     "rootDir": "./src",
     "removeComments": true,
     "typeRoots": ["./node_modules/@types", "./src/@types"],
+    /* A configuração abaixo serve para fazer os import como abaixo
+       import { User } from '@models/User';
+    */
+    //"baseUrl": ".",
+    //"paths":{
+    //  "@controllers/*":["./src/controllers/*"],
+    //  "@models":["./src/models"],
+    //  "@views":["./src/views"],
+    //  "@config":["./src/config"]
+    // }
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
