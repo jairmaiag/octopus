@@ -1,5 +1,5 @@
 node_modules
 bkp
-.env
+env.ts
 dist
 .vscode
