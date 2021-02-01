@@ -75,8 +75,4 @@ Isso não remove o banco de dados.
 typeorm migrate:revert
 ```
 
-## Dúvidas
-
-Em caso de dúvidas entre em contato com [jairmaiag@gmail.com](jairmaiag@gmail.com)
-
 [Voltar ao Índice](#índice)
