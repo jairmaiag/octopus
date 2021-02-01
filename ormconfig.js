@@ -1,0 +1,53 @@
+module.exports = {
+  development: {
+    "type": "postgres",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "username": "octopus",
+    "password": "octopus",
+    "database": "octopus",
+    "synchronize": false,
+    "logging": false,
+    "migrationsRun": true,
+    "entities": [
+      "src/infra/models/*.js", "dist/infra/models/*.js"
+    ],
+    "subscribers": [
+      "dist/infra/subscriber/*.js"
+    ],
+    "migrations": [
+      "dist/infra/migration/*.js"
+    ],
+    "cli": {
+      "entitiesDir": "src/infra/models",
+      "subscribersDir": "src/infra/subscriber",
+      "migrationsDir": "src/infra/migration"
+    }
+  },
+  test: {
+    "type": "postgres",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "username": "test",
+    "password": "test",
+    "database": "test",
+    "synchronize": false,
+    "logging": false,
+    "migrationsRun": true,
+    "entities": [
+      "src/infra/models/*.js", "dist/infra/models/*.js"
+    ],
+    "subscribers": [
+      "dist/infra/subscriber/*.js"
+    ],
+    "migrations": [
+      "dist/infra/migration/*.js"
+    ],
+    "cli": {
+      "entitiesDir": "src/infra/models",
+      "subscribersDir": "src/infra/subscriber",
+      "migrationsDir": "src/infra/migration"
+    }
+  }
+
+}

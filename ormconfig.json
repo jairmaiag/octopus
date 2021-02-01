@@ -9,7 +9,7 @@
   "logging": false,
   "migrationsRun": true,
   "entities": [
-      "dist/infra/models/*.js"
+    "src/infra/models/*.js", "dist/infra/models/*.js"
   ],
   "subscribers": [
      "dist/infra/subscriber/*.js"

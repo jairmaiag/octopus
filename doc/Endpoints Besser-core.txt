@@ -1,0 +1,481 @@
+============================================================================
+                           E X E M P L O S
+============================================================================
+
+> Deve ser utilizado "Basic Authentication"
+  USUARIO: teste
+  SENHA: teste
+
+> Todo request para obter dados será paginado, utilizando os parâmetros na URL "$page=XX" e "$quantity=XXX". O $quantity é opcional.
+  - Caso não retorne mais nenhuma informação, indica que acabou os registros.
+  
+  
+
+1) Lista de preços
+GET http://updates.jjw.com.br:33897/api/v1/listasPrecos/{id}?$page=0&$quantity=100
+
+--------------
+2) Produtos da lista de preços
+GET http://updates.jjw.com.br:33897/api/v1/listasPrecos/{id}/itens?$page=10&$quantity=20
+
+-----------
+3) Detalhes dos produtos 
+GET http://updates.jjw.com.br:33897/api/v1/produtos/{ID}
+
+Exmeplo: GET http://updates.jjw.com.br:33897/api/v1/produtos/1011
+{
+  "id": 1011,
+  "url": "/api/v1/produtos/1011",
+  "classificacaoFiscal": {
+    "id": 2,
+    "parametrosSubstituicaoTributariaUf": [],
+    "empresas": [ {"empresa": { "id": 1 }, "percentualIpi": 0.0  }
+    ],
+    "codigoNcm": "42023200"
+  },
+  "cores": [],
+  "numero": "1090",
+  "descricao": "CAPA SIMPSONS - HOME-IP712-ESTOJO PROTEÇÃO P/ CELULAR-IP6 PLUS - VIDRO",
+  "faixas": [],
+  "icmsEspecificos": [
+    {
+      "estadoDestino": {"id": 17,"url": "/api/v1/estados/17","icms": [] },
+      "estadoOrigem": {"id": 24,"url": "/api/v1/estados/24","icms": []},
+      "percentualIcmsConsumidor": 4.0,
+      "percentualIcmsContribuinte": 4.0
+    },
+    (..mais registros..)
+  ],
+  "imagens": [],
+  "itensGrade": [],
+  "percentualDescontoLimite": 0.0,
+  "peso": 0.07,
+  "produtosEmpresas": [],
+  "reducoesIcms": [],
+  "siglaUnidade": "UN   ",
+  "similares": [],
+  "somaIpiBaseIcms": false,
+  "tamanhos": [],
+  "tipoGrade": "SEM_GRADE",
+  "tributacaoIcms": {
+    "id": 0,
+    "calcula": true,
+    "descricao": "00-Tributada integralmente"
+  },
+  "unidade": {
+    "id": "UN   ",
+    "descricao": "UNIDADE",
+    "quantidadeFracionada": true,
+    "tipAssistenteCalculoUnidade": 0
+  }
+}
+
+-----------
+4) Grupos dos produtos (Categorias)
+GET http://updates.jjw.com.br:33897/api/v1/gruposProdutos?$page=0&$quantity=100
+
+-----------
+5) Criar cliente
+
+5.1.) Pesquisar o Cliente pelo CNPJ/CPF, não retornando nenhum resultado, pode ser feito o POST para criação.
+
+  GET http://updates.jjw.com.br:8280/api/v1/clientes?$page=0&$filter=this.pessoa.numeroCnpjCpf.eq('11.111.111/0001-12')
+
+  
+5.2.) POST http://updates.jjw.com.br:33897/api/v1/clientes
+
+    >> JSON - Envio:
+        {
+          "id": -1,
+          "ativo": true,
+          "avisarVenda": true,
+          "contatos": [
+            {
+              "tipo": "PRINCIPAL",
+              "fone": "47 3394-5145",
+              "nome": "A.P.P U.E.I. ESPAÇO CRESCER"
+            }
+          ],
+          "enderecos": [
+            {
+              "id": 2142,
+              "logradouro": "RUA TESTE",
+              "complemento": "TESTE",
+              "numero": 61,
+              "tipo": "PRINCIPAL",
+              "cep": "42850-000",
+              "bairro": {
+                "id": 2142,
+                "nome": "CENTRO",
+                "cidade": {
+                  "id": 2671,
+                  "estado": {
+                    "id": 5,
+                    "icms": []
+                  },
+                  "nome": "DIAS D AVILA"
+                }
+              }
+            }
+          ],
+          "nome": "CLIENTE DE TESTE",
+          "nomeFantasia": "TESTE DE CELULARES",
+          "numeroCnpjOuCpf": "11.111.111/0001-12",
+          "numeroIeOuRg": "76858704",
+          "percentualCargaTributariaMedia": 0.0,
+          "simplesNacional": false,
+          "tipo": "JURIDICA",
+          "tipoDestinacao": "REVENDA",
+          "tipoTributacao": "IMPOSTO_NORMAL"
+        }
+
+   >> Retorno: HTTP 200 | ou | 400 + Erro
+        JSON de Retorno: {
+          "id": 2627,
+          "url": "/api/v1/clientes/2627",
+          "ativo": true,
+          "avisarVenda": false,
+          "contatos": [
+            {
+              "id": 1514,
+              "fone": "47 3394-5145",
+              "nome": "A.P.P U.E.I. ESPAÇO CRESCER",
+              "tipo": "PRINCIPAL"
+            }
+          ],
+          "enderecos": [
+            {
+              "id": 2478,
+              "logradouro": "RUA TESTE",
+              "complemento": "TESTE",
+              "numero": 61,
+              "tipo": "PRINCIPAL",
+              "cep": "42850-000",
+              "bairro": {
+                "id": 2478,
+                "nome": "CENTRO",
+                "cidade": {
+                  "id": 2671,
+                  "estado": {
+                    "id": 5,
+                    "icms": []
+                  },
+                  "nome": "DIAS D AVILA"
+                }
+              }
+            }
+          ],
+          "nome": "CLIENTE DE TESTE",
+          "nomeFantasia": "TESTE DE CELULARES",
+          "numeroCnpjOuCpf": "11.111.111/0001-12",
+          "numeroIeOuRg": "76858704",
+          "percentualCargaTributariaMedia": 0.0,
+          "simplesNacional": false,
+          "tipo": "JURIDICA",
+          "tipoDestinacao": "REVENDA",
+          "tipoTributacao": "IMPOSTO_NORMAL"
+        }
+
+-------
+6) Criar pedido
+POST http://updates.jjw.com.br:33897/api/v1/pedidos
+
+>>> JSON Envio:
+    [
+      {
+        "cliente": {
+          "id": 466,
+          "contatos": [],
+          "enderecos": [],
+          "nome": "GLOBAL DISTRIBUICAO DE BENS DE CONSUMO LTDA - 0085"
+        },
+        "condicaoPagamento": {
+          "id": 0,
+          "descricao": "A VISTA SEM DUPLICATA"
+        },
+        "cuponsFiscais": [],
+        "dataDigitacao": "2019-02-15T12:50:50.804",
+        "dataEmissao": "2019-02-15",
+        "dataEntrega": "2019-02-18",
+        "itens": [
+          {
+            "id": 73482,
+            "cancelado": false,
+            "itensGrade": [],
+            "percentualDesconto": 0.0,
+            "produto": {
+              "id": 1018,
+              "url": "/api/v1/produtos/1018",
+              "cores": [],
+              "descricao": "CAPA DUALL ST-IP7- DIP701RD-ESTOJO PROTEÇÃO",
+              "faixas": [],
+              "icmsEspecificos": [],
+              "imagens": [],
+              "itensGrade": [],
+              "marca": {
+                "id": 6,
+                "url": "/api/v1/marcas/6",
+                "descricao": "ANTI-SHOCK"
+              },
+              "numero": "1097",
+              "produtosEmpresas": [],
+              "reducoesIcms": [],
+              "siglaUnidade": "UN   ",
+              "similares": [],
+              "tamanhos": []
+            },
+            "quantidadeAFaturar": 0.0,
+            "quantidadePedida": 5.0,
+            "valorIpi": 0.0,
+            "valorSubstituicaoTributaria": 0.0,
+            "valorTotal": 249.5,
+            "valorUnitarioBruto": 49.9,
+            "valorUnitarioLiquido": 49.9
+          }
+        ],
+        "listaPrecos": {
+          "id": 1,
+          "url": "/api/v1/listasPrecos/1",
+          "colunas": [],
+          "descricao": "GERAL",
+          "itens": []
+        },
+        "listaPrecosColuna": {
+          "id": 1,
+          "descricao": "A PRAZO"
+        },
+        "modalidadeVenda": {
+          "id": 0
+        },
+        "notas": [],
+        "percentualAcrescimo": 0.0,
+        "percentualComissao1": 0.0,
+        "percentualDesconto": 0.0,
+        "percentualDesconto1": 0.0,
+        "percentualDesconto2": 0.0,
+        "percentualDesconto3": 0.0,
+        "quantidadeFaturadaMercadorias": 0.0,
+        "quantidadeFaturadaServicos": 0.0,
+        "representante1": {
+          "id": 320,
+          "contatos": [],
+          "enderecos": [],
+          "nome": "IWILL BRASIL IMPORT. E COM. DE ART. DE INFORM LTDA"
+        },
+        "situacao": "EM_ESTUDO",
+        "tipoFreteRedespacho": "CIF",
+        "tipoFreteTransportadora": "CIF",
+        "transportadora": {
+          "id": 697,
+          "contatos": [],
+          "enderecos": [],
+          "nome": "BRASPRESS TRANSPORTES URGENTES LTDA"
+        },
+        "uuid": "00000000012019021500000004660000000000",
+        "valorAcrescimo": 0.0,
+        "valorDesconto": 0.0,
+        "valorDespesas": 0.0,
+        "valorFrete": 0.0,
+        "valorIpi": 0.0,
+        "valorSeguro": 0.0,
+        "valorSubstituicaoTributaria": 0.0,
+        "valorTotalGeral": 249.5
+      }
+    ]
+
+    
+    
+>>> JSON Retorno: HTTP 200
+
+    {
+      "id": 14555,
+      "numero": 11645,
+      "url": "/api/v1/pedidos/14555",
+      "cliente": {
+        "id": 466,
+        "url": "/api/v1/clientes/466",
+        "contatos": [],
+        "enderecos": [],
+        "nome": "GLOBAL DISTRIBUICAO DE BENS DE CONSUMO LTDA - 0085"
+      },
+      "condicaoPagamento": {
+        "id": 0,
+        "url": "/api/v1/condicoesPagamentos/0",
+        "descricao": "A VISTA SEM DUPLICATA"
+      },
+      "cuponsFiscais": [],
+      "dataDigitacao": "2019-02-15T12:50:50.804",
+      "dataEmissao": "2019-02-15",
+      "dataEntrega": "2019-02-18",
+      "empresa": {
+        "id": 1,
+        "url": "/api/v1/empresas/1",
+        "nome": "IWILL BRASIL IMP. E COM. DE ART. DE INFOR. LTDA",
+        "nomeFantasia": "IWILL BRASIL"
+      },
+      "itens": [
+        {
+          "id": 73482,
+          "cancelado": false,
+          "itensGrade": [],
+          "percentualDesconto": 0.0,
+          "produto": {
+            "id": 1018,
+            "url": "/api/v1/produtos/1018",
+            "cores": [],
+            "descricao": "CAPA DUALL ST-IP7- DIP701RD-ESTOJO PROTEÇÃO",
+            "faixas": [],
+            "icmsEspecificos": [],
+            "imagens": [],
+            "itensGrade": [],
+            "marca": {
+              "id": 6,
+              "url": "/api/v1/marcas/6",
+              "descricao": "ANTI-SHOCK"
+            },
+            "numero": "1097",
+            "produtosEmpresas": [],
+            "reducoesIcms": [],
+            "siglaUnidade": "UN   ",
+            "similares": [],
+            "tamanhos": []
+          },
+          "quantidadeAFaturar": 0.0,
+          "quantidadePedida": 5.0,
+          "valorIpi": 0.0,
+          "valorSubstituicaoTributaria": 0.0,
+          "valorTotal": 249.5,
+          "valorUnitarioBruto": 49.9,
+          "valorUnitarioLiquido": 49.9
+        }
+      ],
+      "listaPrecos": {
+        "id": 1,
+        "url": "/api/v1/listasPrecos/1",
+        "colunas": [],
+        "descricao": "GERAL",
+        "itens": []
+      },
+      "listaPrecosColuna": {
+        "id": 1,
+        "descricao": "A PRAZO"
+      },
+      "modalidadeVenda": {
+        "id": 0
+      },
+      "notas": [],
+      "percentualAcrescimo": 0.0,
+      "percentualComissao1": 0.0,
+      "percentualDesconto": 0.0,
+      "percentualDesconto1": 0.0,
+      "percentualDesconto2": 0.0,
+      "percentualDesconto3": 0.0,
+      "quantidadeFaturadaMercadorias": 0.0,
+      "quantidadeFaturadaServicos": 0.0,
+      "representante1": {
+        "id": 320,
+        "url": "/api/v1/representantes/320",
+        "contatos": [],
+        "enderecos": [],
+        "nome": "IWILL BRASIL IMPORT. E COM. DE ART. DE INFORM LTDA"
+      },
+      "situacao": "EM_ESTUDO",
+      "tipoFreteRedespacho": "CIF",
+      "tipoFreteTransportadora": "CIF",
+      "transportadora": {
+        "id": 697,
+        "url": "/api/v1/transportadoras/697",
+        "contatos": [],
+        "enderecos": [],
+        "nome": "BRASPRESS TRANSPORTES URGENTES LTDA"
+      },
+      "uuid": "00000000012019021500000004660000000000",
+      "valorAcrescimo": 0.0,
+      "valorDesconto": 0.0,
+      "valorDespesas": 0.0,
+      "valorFrete": 0.0,
+      "valorIpi": 0.0,
+      "valorSeguro": 0.0,
+      "valorSubstituicaoTributaria": 0.0,
+      "valorTotalGeral": 249.5
+    }
+
+
+
+============================================================================
+             E N D P O I N T       D I S P O N I V E I S
+============================================================================
+
+[/api/v1/calculoImpostos],methods=[POST]}
+
+[/api/v1/pedidos],methods=[POST]}
+[/api/v1/pedidos],methods=[GET]}
+[/api/v1/pedidos/{id}],methods=[GET]}
+[/api/v1/pedidos/{pedidoVendaId}/itens/{pedidoVendaItemId}],methods=[GET]}
+[/api/v1/pedidos/{pedidoVendaId}/cuponsFiscais],methods=[GET]}
+[/api/v1/pedidos/gerarHtml],methods=[POST],produces=[text/html;charset=utf-8]}
+
+[/api/v1/gruposProdutos],methods=[GET]}
+
+[/api/v1/representantes/{representanteId}/titulosReceber],methods=[GET]}
+[/api/v1/representantes],methods=[GET]}
+[/api/v1/representantes/{representanteId}/listasPrecos],methods=[GET]}
+[/api/v1/representantes/{representanteId}/usuarios],methods=[GET]}
+[/api/v1/representantes/{representanteId}/pedidos],methods=[GET]}
+[/api/v1/representantes/{representanteId}/clientes],methods=[GET]}
+
+[/api/v1/listasPrecos/{listaPrecoId}],methods=[GET]}
+[/api/v1/listasPrecos/{listaPrecoId}/produtos],methods=[GET]}
+[/api/v1/listasPrecos/{listaPrecoId}/itens],methods=[GET]}
+
+[/api/v1/produtos/{produtoId}/estoques/grades],methods=[GET]}
+[/api/v1/produtos/{produtoId}/estoques],methods=[GET]}
+[/api/v1/produtos/{produtoId}],methods=[GET]}
+[/api/v1/produtos/{produtoId}/imagens/{imagemId}],methods=[GET]}
+[/api/v1/produtos/{produtoId}/imagens],methods=[GET]}
+[/api/v1/produtos/{produtoId}/cores/{corId}/imagens/{imagemId}],methods=[GET]}
+
+
+[/api/v1/clientes],methods=[POST]}
+[/api/v1/clientes],methods=[GET]}
+[/api/v1/clientes/{id}],methods=[GET]}
+[/api/v1/clientes/{id}/boletos],methods=[GET]}
+[/api/v1/clientes/{id}/creditos],methods=[GET]}
+[/api/v1/clientes/{id}/pedidos],methods=[GET]}
+[/api/v1/clientes/{id}/pedidos/totais],methods=[GET]}
+[/api/v1/clientes/{id}/titulosReceber],methods=[GET]}
+
+[/api/v1/pessoas/creditos],methods=[GET]}
+[/api/v1/pessoas/creditos/{id}],methods=[GET]}
+[/api/v1/pessoas/creditos/{id}/bloquear],methods=[PUT]}
+[/api/v1/pessoas/creditos/{id}/bloquear],methods=[DELETE]}
+[/api/v1/pessoas/creditos/totais],methods=[GET]}
+
+
+[/api/v1/pessoas/{id}],methods=[GET]}
+[/api/v1/pessoas/{id}/titulos/resumo],methods=[GET]}
+[/api/v1/pessoas/{id}/titulos/{tituloId}/bloquear],methods=[PUT]}
+[/api/v1/pessoas/{id}/titulos/resumo-totais],methods=[GET]}
+[/api/v1/pessoas/{id}/titulos/{tituloId}/bloquear],methods=[DELETE]}
+
+[/api/v1/transportadoras],methods=[GET]}
+
+
+[/api/v1/condicoesPagamentos],methods=[GET]}
+[/api/v1/estados],methods=[GET]}
+[/api/v1/parametros/{module}]}
+[/api/v1/recibos/{id}/cancelar],methods=[PUT]}
+[/api/v1/titulosReceber/{id}],methods=[GET]}
+[/api/v1/titulosReceber/situacoes],methods=[POST]}
+[/api/v1/titulos/resumo/{id}],methods=[GET]}
+[/api/v1/cuponsFiscais],methods=[GET]}
+[/api/v1/cuponsFiscais/{id}/itens/{itemId}],methods=[GET]}
+[/api/v1/cuponsFiscais/{id}],methods=[GET]}
+
+
+[/api/v1/notasFiscaisSaida],methods=[GET]}
+[/api/v1/notasFiscaisSaida/{id}/itens/{itemId}],methods=[GET]}
+[/api/v1/notasFiscaisSaida/{id}],methods=[GET]}
+
+
+
