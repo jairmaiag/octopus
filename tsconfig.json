@@ -1,28 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
+    "outDir": "dist",
+    "rootDir": "src",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"],
+    },
+    "typeRoots": ["./node_modules/@types", "src/@types"],
+    "target": "es2019",
+    "module": "CommonJS",
     "lib": ["ES6"],
-    //"allowJs": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "removeComments": true,
-    "typeRoots": ["./node_modules/@types", "./src/@types"],
-    /* A configuração abaixo serve para fazer os import como abaixo
-       import { User } from '@models/User';
-    */
-    "baseUrl": ".",
-    //"paths":{
-    //  "@controllers/*":["./src/controllers/*"],
-    //  "@models":["./src/models"],
-    //  "@views":["./src/views"],
-    //  "@config":["./src/config"]
-    // }
-    "esModuleInterop": true,
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "removeComments": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["./src/**/*"]
+  "compileOnSave": true,
+  "include": ["src"],
+  "exclude": []
 }
